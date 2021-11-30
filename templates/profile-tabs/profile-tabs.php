@@ -13,6 +13,7 @@
 <div  class="upme-profile-tabs-panel">
     <div  class="upme-profile-tabs" style="<?php echo $tabs_status; ?>">
         <div  class="upme-user-profile-tab-panel upme-profile-tab upme-profile-tab-active" data-tab-id="upme-profile-panel" >
+            
             <?php echo apply_filters('upme_profile_tab_items_profile','<i class="upme-profile-tab-icon upme-profile-icon upme-icon-user"></i>',$params); ?>
             <?php
                 if($title_display == 'enabled'){

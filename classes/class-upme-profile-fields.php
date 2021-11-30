@@ -26,7 +26,7 @@ class UPME_Profile_Fields {
         $display = '';
 
         if($upme_settings['profile_view_status'] || current_user_can('manage_options') || current_user_can('manage_upme_options') ){
-      
+
             $display .= '<tr>';
             $profile_status_label = __('Profile Status','upme');
             $display .= '<th scope="row"><label for="' . $profile_status_label . '">' . $profile_status_label . '</label></th>';
@@ -41,9 +41,9 @@ class UPME_Profile_Fields {
                         }
             $display .= '</select></td></tr>';
         }
-        
+
         if($upme_settings['email_two_factor_verification_status'] || current_user_can('manage_options') || current_user_can('manage_upme_options') ){
-            
+
             $display .= '<tr>';
             $label = __('Email Authentication','upme');
             $display .= '<th scope="row"><label for="' . $label . '">' . $label . '</label></th>';
@@ -53,9 +53,9 @@ class UPME_Profile_Fields {
             $display .= '<td><select class="input" name="upme[upme_email_two_factor_status]" id="upme_email_two_factor_status">';
             $display .= '<option value="0" ' . selected($current_profile_status, '0', 0) . '>' . __('Disable','upme') . '</option>';
             $display .= '<option value="1" ' . selected($current_profile_status, '1', 0) . '>' . __('Enable','upme') . '</option>';
-               
+
             $display .= '</select></td></tr>';
-            
+
         }
 
         return $display;
@@ -73,10 +73,10 @@ class UPME_Profile_Fields {
             $display .= '<label class="upme-field-type" for="upme_user_profile_status-' . $profile_user_id . '">';
 
             $name     = __('Profile Status','upme');
-            
+
             $display .= '<i class="upme-icon upme-icon-unlock-alt"></i>';
             $display .= '<span>' . apply_filters('upme_edit_profile_label_upme_user_profile_status', $name) . '</span></label>';
-    
+
             $display .= '<div class="upme-field-value">';
             $display .= '<select class="upme-input " name="upme_user_profile_status-' . $profile_user_id . '" id="upme_user_profile_status-' . $profile_user_id . '" >';
                             foreach ($this->upme_profile_statuses as $status=>$display_status) {
@@ -88,28 +88,28 @@ class UPME_Profile_Fields {
             $display .= '<div class="upme-clear"></div>';
             $display .= '</div></div>';
         }
-        
+
         if($upme_settings['email_two_factor_verification_status']){
-            
+
             $current_profile_status = esc_attr(get_user_meta($profile_user_id, 'upme_email_two_factor_status', true));
 
             $display .= '<div class="upme-field upme-edit">';
             $display .= '<label class="upme-field-type" for="upme_email_two_factor_status-' . $profile_user_id . '">';
 
             $name     = __('Email Authentication','upme');
-            
+
             $display .= '<i class="upme-icon upme-icon-unlock-alt"></i>';
             $display .= '<span>' . apply_filters('upme_edit_profile_label_email_two_factor_status', $name) . '</span></label>';
-    
+
             $display .= '<div class="upme-field-value">';
             $display .= '<select class="upme-input " name="upme_email_two_factor_status-' . $profile_user_id . '" id="upme_email_two_factor_status-' . $profile_user_id . '" >';
             $display .= '<option value="0" ' . selected($current_profile_status, '0', 0) . '>' . __('Disable','upme') . '</option>';
-            $display .= '<option value="1" ' . selected($current_profile_status, '1', 0) . '>' . __('Enable','upme') . '</option>';                            
-                            
+            $display .= '<option value="1" ' . selected($current_profile_status, '1', 0) . '>' . __('Enable','upme') . '</option>';
+
             $display .= '</select>';
             $display .= '<div class="upme-clear"></div>';
             $display .= '</div></div>';
-            
+
         }
 
         return $display;
@@ -117,7 +117,7 @@ class UPME_Profile_Fields {
     }
 
     public function profile_field_block($atts,$content){
-        global $upme_options;    
+        global $upme_options;
         extract( shortcode_atts( array(
                 'key'   => '' ,
               ), $atts ) );
@@ -129,7 +129,7 @@ class UPME_Profile_Fields {
 
         $upme_settings = $upme_options->upme_settings;
         $upme_date_format = (string) isset($upme_settings['date_format']) ? $upme_settings['date_format'] : 'mm/dd/yy';
-            
+
 
         $profile_fields = get_option('upme_profile_fields');
 
@@ -149,13 +149,13 @@ class UPME_Profile_Fields {
                             $display = '<a rel="external nofollow" target="_blank" href="' . $display . '">'.$display.'</a>';
                         }
                         break;
-                    
+
                     case 'fileupload':
                         if($key == 'user_pic' && get_user_meta( $user_id , $key, TRUE) == ''){
                             $display = get_avatar($user_id, 50);
                         }else{
                             $display = '<img style="width:100%" src="' . get_user_meta( $user_id ,$profile_field['meta'], true) . '" alt="" />';
-                        
+
                         }
                         break;
 
@@ -198,7 +198,7 @@ class UPME_Profile_Fields {
                         break;
 
                     case 'soundcloud':
-                        $soundcloud_url = get_user_meta($user_id,$profile_field['meta'],true);                    
+                        $soundcloud_url = get_user_meta($user_id,$profile_field['meta'],true);
                         $sound_cloud_player = upme_sound_cloud_player($soundcloud_url);
 
                         $display .= '<div class="upme-sound-container upme-sound-cloud-container">';
@@ -206,7 +206,7 @@ class UPME_Profile_Fields {
                         $display .= '</div>';
                         break;
 
-                    
+
                 }
             }
 
@@ -232,10 +232,10 @@ class UPME_Profile_Fields {
                     $date_fields[] = $field['meta'];
                 }
 
-            }    
+            }
 
             $header_fields = isset($upme_options->upme_settings['header_fields']) ? $upme_options->upme_settings['header_fields'] : array() ;
-        
+
             $header_fields_display = isset($upme_options->upme_settings['header_fields_display_type']) ? $upme_options->upme_settings['header_fields_display_type'] : '0';
 
             if(is_array($header_fields)){
@@ -249,7 +249,7 @@ class UPME_Profile_Fields {
                         if(in_array($header_field, $date_fields)){
                                 if('' != $value){
                                     $upme_settings = $upme_options->upme_settings;
-                                    $upme_date_format = (string) isset($upme_settings['date_format']) ? $upme_settings['date_format'] : 'mm/dd/yy';       
+                                    $upme_date_format = (string) isset($upme_settings['date_format']) ? $upme_settings['date_format'] : 'mm/dd/yy';
                                     // echo "<pre>";echo $header_field;exit;
                                     $value = upme_date_format_to_custom($value, $upme_date_format);
                                 }
@@ -258,13 +258,13 @@ class UPME_Profile_Fields {
                         $profile_value_params = array('user_id' => $id, 'meta' => $field['meta'] );
                         $value = apply_filters('upme_profile_header_field_value_' . $field['meta'], $upme->get_user_name($id), $profile_value_params);
 
-                        if($header_fields_display == '0'){                            
+                        if($header_fields_display == '0'){
                             $display .= "<p><strong>".$field_names[$header_field]." : </strong>".$value."</p>";
                         }else{
                             $display .= "<p>".$value."</p>";
                         }
-                        
-                        
+
+
                     }
                 }
             }

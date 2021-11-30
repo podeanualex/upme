@@ -7,10 +7,10 @@
     
     
     
-    <div class="upme-slider-design-four  upme-team-design-four upme-team-design" style="background:<?php echo $background_color; ?>;color:<?php echo $font_color; ?>" >
+    <div class="upme-slider-design  upme-team-design-four upme-team-design" style="background:<?php echo 'black'; ?>;color:<?php echo $font_color; ?>" >
         
-        <div class="flexslider flexslider-four">
-            <ul class="slides">            
+        
+            <ul class="slides" style="background-color: black !important;">            
         
                 <?php 
                     $x = 0;
@@ -21,15 +21,15 @@
                 
                 
                   
-                    <li class="upme-single-profile-li" >
+                    <li class="upme-single-profile-li" style="background-color: black !important;">
           
                         
-                        <div class="upme-single-profile">
+                        <div class="upme-single-profile" style="background-color: black !important;">
                             <div class="upme-profile-pic <?php echo $pic_style; ?> "  >
                             <?php echo $profile_pic_display; ?>
                             </div>
 
-                            <div class="upme-clear"></div>
+                            <div class="upme-clear" style="background-color: black !important;"></div>
                         </div>
                     
          
@@ -42,5 +42,10 @@
             </ul>
         </div>
 
-    </div>
+    
 </div>
+<style type="text/css">
+    .flex-next{
+        left: unset !important;
+    }
+</style>
